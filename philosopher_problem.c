@@ -22,7 +22,7 @@ void test(int i) {
 		sem_post(&s[i]);
 	}
 }
-
+//Philosopher is done eating, put forks down and let another eat
 void putforks(int i) {
 	int left = ((i + N - 1) % N);
 	int right = ((i + 1) % N);
@@ -33,7 +33,7 @@ void putforks(int i) {
 	test(right);
 	sem_post(&mutex);
 }
-
+//Change the philosopher state to hungry and let them eat if forks are available.
 void takeforks(int i) {
 	sem_wait(&mutex);
 	statearray[i] = HUNGRY;
