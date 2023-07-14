@@ -52,20 +52,22 @@ void* philosopher(void* p) {
 }
 
 int main(int argc, char* argv[]) {
+	//Get the number of philosophers from the command line args and allocate an array for philosopher states, one for semaphores, and one for threads.
 	N = atoi(argv[1]);
 	statearray = malloc(N * sizeof(int));
 	s = malloc(N * sizeof(sem_t));
 	sem_init(&mutex, 0, 1);
 	pthread_t threads[N];
+	//Initialize all the semaphores.
 	for (int j = 0; j < N; j++) {
 		sem_init(&s[j], 0, 0);
 	}
-
+	//Create a new thread for each philosopher.
 	for (int j = 0; j < N; j++) {
 		pthread_create(&threads[j], NULL, philosopher, j);
 		printf("philosopher %d created\n", j);
 	}
-
+	//Collect all the threads before exiting.
 	for (int j = 0; j < N; j++) {
 		pthread_join(threads[j], NULL);
 	}
