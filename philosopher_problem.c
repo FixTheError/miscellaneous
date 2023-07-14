@@ -11,10 +11,11 @@ int N;
 int* statearray;
 sem_t mutex;
 sem_t* s;
-
+//Determine the state of an adjacent philosopher.
 void test(int i) {
 	int left = (i + N - 1) % N;
 	int right = (i + 1) % N;
+	//If neither adjacent philosopher is eating and the one in the patrameter is hungry, change state to eating.
 	if (statearray[i] == HUNGRY && statearray[left] != EATING && statearray[right] != EATING) {
 		statearray[i] = EATING;
 		printf("philosopher %d is now eating\n", i);
