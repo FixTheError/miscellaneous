@@ -42,7 +42,8 @@ void takeforks(int i) {
 	sem_post(&mutex);
 	sem_wait(&s[i]);
 }
-
+//Each philosopher cycles through states 3 times.
+//Function accepts a void pointer that points to the index number of the philosopher.
 void* philosopher(void* p) {
 	int k = (int)p;
 	for (int j = 0; j < 3; j++) {
