@@ -3,12 +3,14 @@
 #include <unistd.h>
 #include <string.h>
 
+//header struct contains the size and name of the input file.
 struct header {
 	char name[256];
 	int size;
 };
 
 int main(int argc, char* argv[]) {
+	//Set up necessary variables.
 	int a = 0;
 	int l = 0;
 	int e = 0;
@@ -18,6 +20,7 @@ int main(int argc, char* argv[]) {
 	FILE* archive;
 	FILE* file;
 	char* buffer;
+	//get command line options and set flags based on which options were included.
 	while ((opt = getopt(argc, argv, "ale")) != -1) {
 		switch (opt) {
 		case 'a':
